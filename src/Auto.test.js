@@ -8,4 +8,8 @@ describe("Autos", () => {
     it("Verificar que la direccion que la posicion Inicial del usuario tenga un formato correcto", () => {
       expect(valPosicionInicial('3,3R')).toEqual(false);
     });
+
+    it("Verificar que las coordenadas de la posicion Inicial del usuario tenga un formato correcto", () => {
+      expect(valPosicionInicial('Y-6E')).toEqual(false);
+    });
 });
