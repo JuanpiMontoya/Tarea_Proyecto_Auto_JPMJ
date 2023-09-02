@@ -6,5 +6,13 @@ const posInicial = document.querySelector("#pos-inicial");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  posInicial.textContent = comandos.value
+  if(valPosicionInicial(comandos.value) == true)
+  {
+    posInicial.textContent = comandos.value
+  }
+  else
+  {
+    alert("Error al ingresar el valor de la posicion Inicial");
+    comandos.value = ''
+  }
 });
