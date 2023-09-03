@@ -6,6 +6,7 @@ class auto{
         this.coordY = 0
         this.direccion = ""
         this.posIni = ""
+        this.movimientos = ""
     }
 
     getDimX(){
@@ -54,6 +55,14 @@ class auto{
 
     setPosIni(posInicial){
         this.posIni = posInicial
+    }
+
+    getMovimientos(){
+        return this.movimientos
+    }
+
+    setMovimientos(movs){
+        this.movimientos = movs
     }
 
     PosicionInicial(posInicial) {
@@ -107,7 +116,33 @@ class auto{
 
     verComando_Completo(comandos_auto_completo)
     {
-        return true;
+        //Dividimos el comando para el inicio del auto y sus comandos de movimiento verificando si esta escrito correctamente
+        var Comando_Movs,Inicio_Auto,Division_Ini,Division_Mov;
+        Division_Ini = comandos_auto_completo.indexOf('/');
+        Division_Mov = comandos_auto_completo.indexOf('/', Division_Ini + 1);
+        if ( Division_Mov !== -1) 
+        {
+            Inicio_Auto = comandos_auto_completo.substring(0,Division_Mov);
+            Comando_Movs = comandos_auto_completo.substring( Division_Mov + 1);
+            if(this.DimensionesyPos_Inicial(Inicio_Auto) == true)
+            {
+                var letrasComando = /^[IAD]+$/;
+                if (letrasComando.test(Comando_Movs)) 
+                {
+                    this.setMovimientos(Comando_Movs)
+                    return true;
+                } 
+                else 
+                {
+                    return false;
+                }
+            }
+        } 
+        else 
+        {
+            return false;
+        }
+            
     }
 }
 export default auto;
