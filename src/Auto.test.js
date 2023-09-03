@@ -27,4 +27,9 @@ describe("Autos", () => {
       expect(auto_pruebas.getCoordY()).toEqual(5);
       expect(auto_pruebas.getDireccion()).toEqual('O');
     });
+
+    it("Verificar que los comandos del usuario acepten los movimientos del auto", () => {
+      expect(auto_pruebas.verComando_Completo('10,10/3,5O/IAIXASXZ')).toEqual(true);
+    });
+
 });

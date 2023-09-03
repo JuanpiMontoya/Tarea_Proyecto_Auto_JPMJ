@@ -104,5 +104,10 @@ class auto{
             }
         }
     }
+
+    verComando_Completo(comandos_auto_completo)
+    {
+        return true;
+    }
 }
 export default auto;
