@@ -1,19 +1,30 @@
-import funciones_auto from "./Auto"
+import auto from "./Auto"
+
+const auto_pruebas = new auto();
 
 describe("Autos", () => {
     it("El usuario puede ingresar la pos. inicial del auto", () => {
-      expect(funciones_auto.valPosicionInicial('1,2N')).toEqual(true);
+      expect(auto_pruebas.PosicionInicial('1,2N')).toEqual(true);
     });
 
     it("Verificar que la direccion que la posicion Inicial del usuario tenga un formato correcto", () => {
-      expect(funciones_auto.valPosicionInicial('3,3R')).toEqual(false);
+      expect(auto_pruebas.PosicionInicial('3,3R')).toEqual(false);
     });
 
     it("Verificar que las coordenadas de la posicion Inicial del usuario tenga un formato correcto", () => {
-      expect(funciones_auto.valPosicionInicial('Y-6E')).toEqual(false);
+      expect(auto_pruebas.PosicionInicial('Y-6E')).toEqual(false);
     });
 
     it("Verificar que las coordenadas de la posicion Inicial sean correctas añadiendo las dimensiones de X y Y", () => {
-      expect(funciones_auto.valDimensionesyPos_Inicial('8,5/23,9O')).toEqual(false);
+      expect(auto_pruebas.DimensionesyPos_Inicial('8,5/23,9O')).toEqual(false);
+    });
+
+    it("Verificar que los cambios al proyecto al volverlo una clase y devolver sus atributos esten correctos", () => {
+      expect(auto_pruebas.DimensionesyPos_Inicial('10,10/3,5O')).toEqual(true);
+      expect(auto_pruebas.getDimX()).toEqual(10);
+      expect(auto_pruebas.getDimY()).toEqual(10);
+      expect(auto_pruebas.getCoordX()).toEqual(3);
+      expect(auto_pruebas.getCoordY()).toEqual(5);
+      expect(auto_pruebas.getDireccion()).toEqual('O');
     });
 });

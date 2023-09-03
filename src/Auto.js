@@ -1,51 +1,108 @@
-function valPosicionInicial(posIni) {
-    var dir = posIni.slice(-1);
-    var coordsIni = posIni.match(/(\d+)\,(\d+)/);
-    if(dir == 'N' || dir == 'S' || dir == 'E' || dir == 'O')
-    {
-        if (coordsIni)
+class auto{
+    constructor(){
+        this.dimX = 0
+        this.dimY = 0
+        this.coordX = 0
+        this.coordY = 0
+        this.direccion = ""
+        this.posIni = ""
+    }
+
+    getDimX(){
+        return this.dimX
+    }
+
+    setDimX(dimensionX){
+        this.dimX = +dimensionX
+    }
+
+    getDimY(){
+        return this.dimY
+    }
+
+    setDimY(dimensionY){
+        this.dimY = +dimensionY
+    }
+
+    getCoordX(){
+        return this.coordX
+    }
+
+    setCoordX(coordenadaX){
+        this.coordX = +coordenadaX
+    }
+
+    getCoordY(){
+        return this.coordY
+    }
+
+    setCoordY(coordenadaY){
+        this.coordY = +coordenadaY
+    }
+
+    getDireccion(){
+        return this.direccion
+    }
+
+    setDireccion(dir){
+        this.direccion = dir
+    }
+
+    getPosIni(){
+        return this.posIni
+    }
+
+    setPosIni(posInicial){
+        this.posIni = posInicial
+    }
+
+    PosicionInicial(posInicial) {
+        var dir = posInicial.slice(-1);
+        var coordsIni = posInicial.match(/(\d+)\,(\d+)/);
+        if(dir == 'N' || dir == 'S' || dir == 'E' || dir == 'O')
         {
-            return true;
+            if (coordsIni)
+            {
+                //Se dividieron las coordenadas iniciales y asignamos sus valores respectivos
+                this.setCoordX(coordsIni[1])
+                this.setCoordY(coordsIni[2])
+                this.setDireccion(dir)
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
             return false;
         }
     }
-    else
-    {
-        return false;
-    }
-  }
 
-  function valDimensionesyPos_Inicial(comando_Inicio_auto)
-  {
-    var ComandoUsu,dimensiones,posIni,valDim,dimX,dimY,coordsIni,coordX,coordY;
-    ComandoUsu = comando_Inicio_auto.split("/");
-    //Dividimos las dimensiones de la superficie y la posicion inicial del auto
-    dimensiones = ComandoUsu[0];
-    posIni = ComandoUsu[1];
-    //Separamos los valores X y Y de las dimensiones de la superficie
-    valDim = dimensiones.match(/(\d+)\,(\d+)/);
-    dimX = valDim[1];
-    dimY = valDim[2];
-    //Verificamos los valores X y Y de la posicion inicial con las dimensiones dadas
-    if(valDim && valPosicionInicial(posIni) == true)
+    DimensionesyPos_Inicial(comandos_auto)
     {
-        coordsIni = posIni.match(/(\d+)\,(\d+)/);
-        coordX = coordsIni[1];
-        coordY = coordsIni[2];
-        if(coordX <= dimX && coordY <= dimY )
+        var Comando_Ing ,dimensiones,valDim;
+        Comando_Ing = comandos_auto.split("/");
+        //Dividimos las dimensiones de la superficie y la posicion inicial del auto
+        dimensiones = Comando_Ing[0];
+        this.setPosIni(Comando_Ing[1])
+        //Separamos los valores X y Y de las dimensiones de la superficie y asignamos sus valores respectivos
+        valDim = dimensiones.match(/(\d+)\,(\d+)/);
+        this.setDimX(valDim[1]) 
+        this.setDimY(valDim[2])
+        //Verificamos los valores X y Y de la posicion inicial con las dimensiones dadas
+        if(valDim && this.PosicionInicial(this.getPosIni()) == true)
         {
-            return true;
-        }
-        else
-        {
-            return false;
+            if(this.getDimX() >= this.getCoordX() && this.getDimY() >= this.getCoordY())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
-  }
-
-  const funciones_auto = {valPosicionInicial,valDimensionesyPos_Inicial};
-
-  export default funciones_auto;
+}
+export default auto;
