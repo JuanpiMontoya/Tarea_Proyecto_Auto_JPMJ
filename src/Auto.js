@@ -11,55 +11,55 @@ class auto{
 
     // Gets y sets respectivos
     getDimX(){
-        return this.dimX
+        return this.dimX;
     }
 
     setDimX(dimensionX){
-        this.dimX = +dimensionX
+        this.dimX = +dimensionX;
     }
 
     getDimY(){
-        return this.dimY
+        return this.dimY;
     }
 
     setDimY(dimensionY){
-        this.dimY = +dimensionY
+        this.dimY = +dimensionY;
     }
 
     getCoordX(){
-        return this.coordX
+        return this.coordX;
     }
 
     setCoordX(coordenadaX){
-        this.coordX = +coordenadaX
+        this.coordX = +coordenadaX;
     }
 
     getCoordY(){
-        return this.coordY
+        return this.coordY;
     }
 
     setCoordY(coordenadaY){
-        this.coordY = +coordenadaY
+        this.coordY = +coordenadaY;
     }
 
     getDireccion(){
-        return this.direccion
+        return this.direccion;
     }
 
     setDireccion(dir){
-        this.direccion = dir
+        this.direccion = dir;
     }
 
     getPosIni(){
-        return this.posIni
+        return this.posIni;
     }
 
     setPosIni(posInicial){
-        this.posIni = posInicial
+        this.posIni = posInicial;
     }
 
     getMovimientos(){
-        return this.movimientos
+        return this.movimientos;
     }
 
     setMovimientos(movs){
@@ -68,16 +68,18 @@ class auto{
 
     // Verificamos la posicion inicial
     PosicionInicial(posInicial) {
+        // Buscamos el ultimo caracter para identificar la direccion
         var dir = posInicial.slice(-1);
+        // Buscamos el caracter coma para identificar las coordenadas
         var coordsIni = posInicial.match(/(\d+)\,(\d+)/);
         if(dir == 'N' || dir == 'S' || dir == 'E' || dir == 'O')
         {
             if (coordsIni)
             {
                 //Se dividieron las coordenadas iniciales y asignamos sus valores respectivos
-                this.setCoordX(coordsIni[1])
-                this.setCoordY(coordsIni[2])
-                this.setDireccion(dir)
+                this.setCoordX(coordsIni[1]);
+                this.setCoordY(coordsIni[2]);
+                this.setDireccion(dir);
                 return true;
             }
             else
@@ -95,14 +97,14 @@ class auto{
     DimensionesyPos_Inicial(comandos_auto)
     {
         var Comando_Ing ,dimensiones,valDim;
+        //Dividimos las dimensiones de la superficie y la posicion inicial del auto buscando el caracter /
         Comando_Ing = comandos_auto.split("/");
-        //Dividimos las dimensiones de la superficie y la posicion inicial del auto
         dimensiones = Comando_Ing[0];
-        this.setPosIni(Comando_Ing[1])
+        this.setPosIni(Comando_Ing[1]);
         //Separamos los valores X y Y de las dimensiones de la superficie y asignamos sus valores respectivos
         valDim = dimensiones.match(/(\d+)\,(\d+)/);
-        this.setDimX(valDim[1]) 
-        this.setDimY(valDim[2])
+        this.setDimX(valDim[1]); 
+        this.setDimY(valDim[2]);
         //Verificamos los valores X y Y de la posicion inicial con las dimensiones dadas
         if(valDim && this.PosicionInicial(this.getPosIni()) == true)
         {
@@ -130,10 +132,11 @@ class auto{
             Comando_Movs = comandos_auto_completo.substring( Division_Mov + 1);
             if(this.DimensionesyPos_Inicial(Inicio_Auto) == true)
             {
+                //Se verifico que el comando de movimientos solo tengan los caracteres I,A y D
                 var letrasComando = /^[IAD]+$/;
                 if (letrasComando.test(Comando_Movs) && Comando_Movs.length <=30) 
                 {
-                    this.setMovimientos(Comando_Movs)
+                    this.setMovimientos(Comando_Movs);
                     return true;
                 } 
                 else 
@@ -191,7 +194,7 @@ class auto{
                 }
                 break;
         }
-        return cambio_dir
+        return cambio_dir;
     }
 
     //Modificamos el valor de la posicion y la direccion
@@ -204,29 +207,33 @@ class auto{
             case "A":
                 switch(dir)
                 {
-                case "N":                    
+                case "N":   
+                    //Se verifica que no supere la dimension Y                
                     if(this.getDimY() >= coordY + 1)
                     {
-                        console.log("Ingreso N")
-                        coordY = coordY + 1
+                        console.log("Ingreso N");
+                        coordY = coordY + 1;
                     }                   
                     break;
                 case "S":
+                    //Se verifica que Y nunca llegue a valer 0
                     if(coordY != 0)
                     {
-                        coordY = coordY - 1
+                        coordY = coordY - 1;
                     }
                     break;
                 case "E":
+                    //Se verifica que no supere la dimension X
                     if(this.getDimX() >= coordX + 1)
                     {
-                        coordX = coordX + 1
+                        coordX = coordX + 1;
                     }
                     break;
                 case "O":
+                    //Se verifica que X nunca llegue a valer 0
                     if(coordX != 0)
                     {
-                        coordX = coordX - 1
+                        coordX = coordX - 1;
                     }
                     break;
                 }

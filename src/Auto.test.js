@@ -3,19 +3,19 @@ import auto from "./Auto"
 const auto_pruebas = new auto();
 
 describe("Autos", () => {
-    it("El usuario puede ingresar la pos. inicial del auto", () => {
+    it("El usuario puede ingresar la posicion inicial del auto", () => {
       expect(auto_pruebas.PosicionInicial('1,2N')).toEqual(true);
     });
 
-    it("Verificar que la direccion que la posicion Inicial del usuario tenga un formato correcto", () => {
+    it("Verificar que la dirección que la posición Inicial del usuario tenga un formato correcto", () => {
       expect(auto_pruebas.PosicionInicial('3,3R')).toEqual(false);
     });
 
-    it("Verificar que las coordenadas de la posicion Inicial del usuario tenga un formato correcto", () => {
+    it("Verificar que las coordenadas de la posición Inicial del usuario tenga un formato correcto", () => {
       expect(auto_pruebas.PosicionInicial('Y-6E')).toEqual(false);
     });
 
-    it("Verificar que las coordenadas de la posicion Inicial sean correctas añadiendo las dimensiones de X y Y", () => {
+    it("Verificar que las coordenadas de la posición Inicial sean correctas añadiendo las dimensiones de X y Y", () => {
       expect(auto_pruebas.DimensionesyPos_Inicial('8,5/23,9O')).toEqual(false);
     });
 
@@ -36,15 +36,15 @@ describe("Autos", () => {
       expect(auto_pruebas.verComando_Completo('10,10/3,5O/IAIXASXZ')).toEqual(false);
     });
 
-    it("Verificar que el usuario no pueda escribir mas de 30 comandos de movimiento", () => {
+    it("Verificar que el usuario no pueda escribir más de 30 comandos de movimiento", () => {
       expect(auto_pruebas.verComando_Completo('10,10/3,5O/IAIDDIIAIDAIAADDDIIAAIAAADIDIDAIDD')).toEqual(false);
     });
 
-    it("Verificar que el comando de movimiento I (Izquierda) cambie la direccion del auto ", () => {
+    it("Verificar que el comando de movimiento I (Izquierda) cambie la dirección del auto ", () => {
       expect(auto_pruebas.cambiarDir_Auto('N','IIIIIII')).toEqual('E');
     });
 
-    it("Verificar que el comando de movimiento I (Izquierda) y Derecha (D) cambie la direccion del auto ", () => {
+    it("Verificar que el comando de movimiento I (Izquierda) y Derecha (D) cambie la dirección del auto ", () => {
       expect(auto_pruebas.cambiarDir_Auto('E','IDIDD')).toEqual('S');
     });
 

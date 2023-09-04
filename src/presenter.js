@@ -21,7 +21,7 @@ form.addEventListener("submit", (event) => {
   }
   else
   {
-    alert("Error al ingresar el valor de la posicion Inicial");
-    comandos.value = ''
+    alert("Error al ingresar el comando del auto");
+    comandos.value = '';
   }
 });
