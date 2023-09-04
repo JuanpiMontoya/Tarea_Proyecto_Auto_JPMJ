@@ -35,4 +35,8 @@ describe("Autos", () => {
     it("Verificar que los comandos del usuario con los movimientos del auto tengan el formato correcto", () => {
       expect(auto_pruebas.verComando_Completo('10,10/3,5O/IAIXASXZ')).toEqual(false);
     });
+
+    it("Verificar que el usuario no pueda escribir mas de 30 comandos de movimiento", () => {
+      expect(auto_pruebas.verComando_Completo('10,10/3,5O/IAIDDIIAIDAIAADDDIIAAIAAADIDIDAIDD')).toEqual(false);
+    });
 });

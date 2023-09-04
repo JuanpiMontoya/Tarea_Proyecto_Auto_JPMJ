@@ -120,14 +120,14 @@ class auto{
         var Comando_Movs,Inicio_Auto,Division_Ini,Division_Mov;
         Division_Ini = comandos_auto_completo.indexOf('/');
         Division_Mov = comandos_auto_completo.indexOf('/', Division_Ini + 1);
-        if ( Division_Mov !== -1) 
+        if (Division_Mov !== -1) 
         {
             Inicio_Auto = comandos_auto_completo.substring(0,Division_Mov);
             Comando_Movs = comandos_auto_completo.substring( Division_Mov + 1);
             if(this.DimensionesyPos_Inicial(Inicio_Auto) == true)
             {
                 var letrasComando = /^[IAD]+$/;
-                if (letrasComando.test(Comando_Movs)) 
+                if (letrasComando.test(Comando_Movs) && Comando_Movs.length <=30) 
                 {
                     this.setMovimientos(Comando_Movs)
                     return true;
