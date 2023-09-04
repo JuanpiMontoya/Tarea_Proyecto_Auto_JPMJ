@@ -57,4 +57,8 @@ describe("Autos", () => {
       expect(auto_pruebas.cambiarPos_Auto(2,8,'N','AAAADAA')).toEqual('4,10E');
     });
 
+    it("Verificar que el comando de movimiento A cambie las posiciones del auto sin salir de las dimensiones X y Y", () => {
+      expect(auto_pruebas.cambiarPos_Auto(1,2,'O','AAAAADDDAIAA')).toEqual('2,1E');
+      expect(auto_pruebas.cambiarPos_Auto(8,2,'E','AAAAADAA')).toEqual('10,0S');
+    });
 });

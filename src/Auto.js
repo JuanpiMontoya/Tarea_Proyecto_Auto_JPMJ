@@ -205,8 +205,6 @@ class auto{
                 switch(dir)
                 {
                 case "N":                    
-                    console.log(this.getDimY())
-                    console.log(coordY)
                     if(this.getDimY() >= coordY + 1)
                     {
                         console.log("Ingreso N")
@@ -220,10 +218,16 @@ class auto{
                     }
                     break;
                 case "E":
-                    coordX = coordX + 1
+                    if(this.getDimX() >= coordX + 1)
+                    {
+                        coordX = coordX + 1
+                    }
                     break;
                 case "O":
-                    coordX = coordX - 1
+                    if(coordX != 0)
+                    {
+                        coordX = coordX - 1
+                    }
                     break;
                 }
             break;
