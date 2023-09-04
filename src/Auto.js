@@ -204,11 +204,20 @@ class auto{
             case "A":
                 switch(dir)
                 {
-                case "N":
-                    coordY = coordY + 1
+                case "N":                    
+                    console.log(this.getDimY())
+                    console.log(coordY)
+                    if(this.getDimY() >= coordY + 1)
+                    {
+                        console.log("Ingreso N")
+                        coordY = coordY + 1
+                    }                   
                     break;
                 case "S":
-                    coordY = coordY - 1
+                    if(coordY != 0)
+                    {
+                        coordY = coordY - 1
+                    }
                     break;
                 case "E":
                     coordX = coordX + 1
@@ -223,9 +232,6 @@ class auto{
                 cambio_dir = this.mod_direccion(com, dir);
                 dir = cambio_dir;
         }
-        console.log("X:" + coordX)
-        console.log("Y:" + coordY)
-        console.log("Dir" + dir)
         return { coordX, coordY, dir };
     }
 
