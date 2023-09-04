@@ -44,4 +44,8 @@ describe("Autos", () => {
       expect(auto_pruebas.cambiarDir_Auto('N','IIIIIII')).toEqual('E');
     });
 
+    it("Verificar que el comando de movimiento I (Izquierda) y Derecha (D) cambie la direccion del auto ", () => {
+      expect(auto_pruebas.cambiarDir_Auto('E','IDIDD')).toEqual('S');
+    });
+
 });

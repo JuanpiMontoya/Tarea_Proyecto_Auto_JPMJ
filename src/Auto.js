@@ -172,10 +172,28 @@ class auto{
                           break;
                       }
                   break;
+                case "D":
+                    switch(dir)
+                    {
+                        case "N":
+                          nueva_dir = 'O';
+                          break;
+                        case "S":
+                          nueva_dir = 'E';
+                          break;
+                        case "E":
+                          nueva_dir = 'S';
+                          break;
+                        case "O":
+                          nueva_dir = 'N';
+                          break;
+                      }
+                  break;
               }
+            dir = nueva_dir
+            this.setDireccion(nueva_dir)
             cont++;
         }
-        this.setDireccion(nueva_dir)
         return nueva_dir;
     }
 }
