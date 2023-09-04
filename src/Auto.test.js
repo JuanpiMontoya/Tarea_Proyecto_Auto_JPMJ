@@ -39,4 +39,9 @@ describe("Autos", () => {
     it("Verificar que el usuario no pueda escribir mas de 30 comandos de movimiento", () => {
       expect(auto_pruebas.verComando_Completo('10,10/3,5O/IAIDDIIAIDAIAADDDIIAAIAAADIDIDAIDD')).toEqual(false);
     });
+
+    it("Verificar que el comando de movimiento I (Izquierda) cambie la direccion del auto ", () => {
+      expect(auto_pruebas.cambiarDir_Auto('N','IIIIIII')).toEqual('E');
+    });
+
 });

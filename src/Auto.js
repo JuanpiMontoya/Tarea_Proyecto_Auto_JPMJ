@@ -144,5 +144,39 @@ class auto{
         }
             
     }
+
+    cambiarDir_Auto(dir,movimientos_auto)
+    {
+        let nueva_dir = '';
+        //Hacemos un ciclo while cambiando la direccion del auto en base a cada comando de movimiento ingresado
+        var cont = 0;
+        while (cont < movimientos_auto.length) {
+            var comando = movimientos_auto.charAt(cont);
+            switch(comando)
+            {
+                //Si ingreso I (Izquierda) 
+                case "I":
+                    switch(dir)
+                    {
+                        case "N":
+                          nueva_dir = 'E';
+                          break;
+                        case "S":
+                          nueva_dir = 'O';
+                          break;
+                        case "E":
+                          nueva_dir = 'N';
+                          break;
+                        case "O":
+                          nueva_dir = 'S';
+                          break;
+                      }
+                  break;
+              }
+            cont++;
+        }
+        this.setDireccion(nueva_dir)
+        return nueva_dir;
+    }
 }
 export default auto;
