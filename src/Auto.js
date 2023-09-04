@@ -9,6 +9,7 @@ class auto{
         this.movimientos = ""
     }
 
+    // Gets y sets respectivos
     getDimX(){
         return this.dimX
     }
@@ -65,6 +66,7 @@ class auto{
         this.movimientos = movs
     }
 
+    // Verificamos la posicion inicial
     PosicionInicial(posInicial) {
         var dir = posInicial.slice(-1);
         var coordsIni = posInicial.match(/(\d+)\,(\d+)/);
@@ -89,6 +91,7 @@ class auto{
         }
     }
 
+    // Verificamos la posicion inicial y sus dimensiones
     DimensionesyPos_Inicial(comandos_auto)
     {
         var Comando_Ing ,dimensiones,valDim;
@@ -114,6 +117,7 @@ class auto{
         }
     }
 
+    // Verificamos si todo el comando ingresado esta correcto
     verComando_Completo(comandos_auto_completo)
     {
         //Dividimos el comando para el inicio del auto y sus comandos de movimiento verificando si esta escrito correctamente
@@ -145,6 +149,87 @@ class auto{
             
     }
 
+    // Modificamos el valor de la direccion
+    mod_direccion(com_Dir,dir,cambio_dir)
+    {
+        switch(com_Dir)
+        {
+            //Si ingreso I (Izquierda) 
+            case "I":
+                switch(dir)
+                {
+                case "N":
+                    cambio_dir = 'O';
+                    break;
+                case "S":
+                    cambio_dir = 'E';
+                    break;
+                case "E":
+                    cambio_dir = 'N';
+                    break;
+                case "O":
+                    cambio_dir = 'S';
+                    break;
+                }
+            break;
+            //Si ingreso D (derecha) 
+            case "D":
+                switch(dir)
+                {
+                case "N":
+                    cambio_dir = 'E';
+                    break;
+                case "S":
+                    cambio_dir = 'O';
+                    break;
+                case "E":
+                    cambio_dir = 'S';
+                    break;
+                case "O":
+                    cambio_dir = 'N';
+                    break;
+                }
+                break;
+        }
+        return cambio_dir
+    }
+
+    //Modificamos el valor de la posicion y la direccion
+    mod_posicion_y_dir(coordX,coordY,dir,com)
+    {
+        let cambio_dir = '';
+        switch(com)
+        {
+            //Si ingreso I (Izquierda) 
+            case "A":
+                switch(dir)
+                {
+                case "N":
+                    coordY = coordY + 1
+                    break;
+                case "S":
+                    coordY = coordY - 1
+                    break;
+                case "E":
+                    coordX = coordX + 1
+                    break;
+                case "O":
+                    coordX = coordX - 1
+                    break;
+                }
+            break;
+            case "I":  
+            case "D":
+                cambio_dir = this.mod_direccion(com, dir);
+                dir = cambio_dir;
+        }
+        console.log("X:" + coordX)
+        console.log("Y:" + coordY)
+        console.log("Dir" + dir)
+        return { coordX, coordY, dir };
+    }
+
+    //Funcion con la que cambiamos la direccion del auto
     cambiarDir_Auto(dir,movimientos_auto)
     {
         let nueva_dir = '';
@@ -152,49 +237,27 @@ class auto{
         var cont = 0;
         while (cont < movimientos_auto.length) {
             var comando = movimientos_auto.charAt(cont);
-            switch(comando)
-            {
-                //Si ingreso I (Izquierda) 
-                case "I":
-                    switch(dir)
-                    {
-                        case "N":
-                          nueva_dir = 'E';
-                          break;
-                        case "S":
-                          nueva_dir = 'O';
-                          break;
-                        case "E":
-                          nueva_dir = 'N';
-                          break;
-                        case "O":
-                          nueva_dir = 'S';
-                          break;
-                      }
-                  break;
-                case "D":
-                    switch(dir)
-                    {
-                        case "N":
-                          nueva_dir = 'O';
-                          break;
-                        case "S":
-                          nueva_dir = 'E';
-                          break;
-                        case "E":
-                          nueva_dir = 'S';
-                          break;
-                        case "O":
-                          nueva_dir = 'N';
-                          break;
-                      }
-                  break;
-              }
-            dir = nueva_dir
-            this.setDireccion(nueva_dir)
+            dir = this.mod_direccion(comando,dir,nueva_dir);
+            this.setDireccion(nueva_dir);
             cont++;
         }
-        return nueva_dir;
+        return dir;
+    }
+
+    //Funcion con la que cambiamos la posicion y direccion del auto
+    cambiarPos_Auto(coordX,coordY,dir,movimientos_auto)
+    {
+        //Hacemos un ciclo while cambiando la posicion y direccion del auto en base a cada comando de movimiento ingresado
+        var cont = 0;
+        while (cont < movimientos_auto.length) {
+            var comando = movimientos_auto.charAt(cont);
+            var cambio_Auto = this.mod_posicion_y_dir(coordX,coordY,dir,comando);
+            coordX = cambio_Auto.coordX;
+            coordY = cambio_Auto.coordY;
+            dir = cambio_Auto.dir;
+            cont++;
+        }
+        return coordX + "," + coordY + dir;
     }
 }
 export default auto;

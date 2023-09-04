@@ -48,4 +48,8 @@ describe("Autos", () => {
       expect(auto_pruebas.cambiarDir_Auto('E','IDIDD')).toEqual('S');
     });
 
+    it("Verificar que el comando de movimiento A cambie las posiciones del auto", () => {
+      expect(auto_pruebas.cambiarPos_Auto(1,2,'N','DAAAIAAI')).toEqual('4,4O');
+    });
+
 });

@@ -9,13 +9,15 @@ const auto_Proyecto = new auto();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  //Se verifica que el comando ingresado este correcto
   if(auto_Proyecto.verComando_Completo(comandos.value) == true)
   {
-    ComandoAuto = comandos.value.split("/");
-    //Dividimos el comando y mostramos la posicion inicial
+    //Colocamos el valor de la posicion inicial
     posInicial.textContent = auto_Proyecto.getPosIni();
+    //Colocamos el valor de los comandos de movimiento
     comandos_mov.textContent = auto_Proyecto.getMovimientos();
-    posFinal.textContent = auto_Proyecto.getCoordX() + "," + auto_Proyecto.getCoordY() + auto_Proyecto.cambiarDir_Auto(auto_Proyecto.getDireccion(),auto_Proyecto.getMovimientos());
+    //Colocamos el valor de la posicion final
+    posFinal.textContent = auto_Proyecto.cambiarPos_Auto(auto_Proyecto.getCoordX(),auto_Proyecto.getCoordY(),auto_Proyecto.getDireccion(),comandos.value);
   }
   else
   {
